@@ -1,8 +1,6 @@
 import React, { useState } from "react";
 import "./styles.css";
 
-// L'iinput section è completata e dovrebbe essere funzionale. Il prossimo step è quello di prendere il valore immesso nella form e trasferirlo nella lista delle task sottostante.
-
 function App() {
   return (
     <div className="App">
@@ -12,19 +10,25 @@ function App() {
 }
 
 export function TasksContainer() {
+  const [tasks, setTasks] = useState([]);
+
+  const addTask = (newTask) => {
+    setTasks([...tasks, newTask]);
+  };
+
   return (
     <div className="bg-gray-800 py-10 px-16 rounded-3xl">
       <h1 className="text-4xl text-white font-sans uppercase font-bold tracking-wider">
         List of your tasks
       </h1>
-      <NewTask />
-      <TasksList />
+      <NewTask onAddTask={addTask} />
+      <TasksList tasks={tasks} />
       <ButtonsBanner />
     </div>
   );
 }
 
-export function NewTask() {
+export function NewTask({ onAddTask }) {
   const [inputTask, setInputTask] = useState("");
 
   const handleInputChange = (e) => {
@@ -32,7 +36,11 @@ export function NewTask() {
   };
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log(inputTask);
+    if (inputTask.trim()) {
+      onAddTask(inputTask);
+      setInputTask("");
+    }
+    console.log("New task:", inputTask);
   };
 
   return (
@@ -50,13 +58,13 @@ export function NewTask() {
   );
 }
 
-export function TasksList() {
+export function TasksList({ tasks }) {
   return (
     <div className=" text-white">
       <ul>
-        <li>This is a task</li>
-        <li>This is a task</li>
-        <li>This is a task</li>
+        {tasks.map((task, index) => (
+          <li key={index}>{task}</li>
+        ))}
       </ul>
     </div>
   );
