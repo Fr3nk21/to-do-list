@@ -53,15 +53,20 @@ export function NewTask({ onAddTask }) {
   };
 
   return (
-    <div>
-      <form onSubmit={handleSubmit}>
+    <div className="flex flex-row justify-stretch w-full">
+      <form onSubmit={handleSubmit} className="w-full">
         <input
-          className="w-full h-8 mt-10 mb-10 rounded-md"
+          className="h-8 mt-10 mb-10 rounded-md w-80"
           type="text"
           value={inputTask}
           onChange={handleInputChange}
         />
-        <button type="submit">Add</button>
+        <button
+          type="submit"
+          className="px-2 py-1 ml-6 rounded-md text-white font-sans uppercase font-bold  bg-green-600 hover:bg-green-900 duration-300"
+        >
+          Add
+        </button>
       </form>
     </div>
   );
@@ -69,12 +74,20 @@ export function NewTask({ onAddTask }) {
 
 export function TasksList({ tasks, onRemoveTask }) {
   return (
-    <div className=" text-white">
-      <ul>
+    <div>
+      <ul className="w-full">
         {tasks.map((task) => (
-          <li key={task.id}>
-            {task.text}
-            <button onClick={() => onRemoveTask(task.id)}>X</button>
+          <li
+            key={task.id}
+            className="flex flex-row justify-between text-white border-b-2 border-slate-700 border-solid"
+          >
+            <div className="justify-center align-middle py-2">{task.text}</div>
+            <button
+              onClick={() => onRemoveTask(task.id)}
+              className="px-2 py-1 ml-6 rounded-md text-red-900 font-sans uppercase font-bold hover:text-white hover:bg-red-800 duration-300"
+            >
+              X
+            </button>
           </li>
         ))}
       </ul>
