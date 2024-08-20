@@ -1,5 +1,7 @@
 import React, { useState } from "react";
 import "./styles.css";
+import NewTask from "./components/NewTask.js";
+import TasksList from "./components/TasksList.js";
 
 function App() {
   return (
@@ -32,68 +34,6 @@ export function TasksContainer() {
       </h1>
       <NewTask onAddTask={addTask} />
       <TasksList tasks={tasks} onRemoveTask={removeTask} />
-    </div>
-  );
-}
-
-export function NewTask({ onAddTask }) {
-  const [inputTask, setInputTask] = useState(""); // This state is responsible to create a string from the "inputTask"
-
-  // This arrow function it's responsible to set the setInputTask to the e.target.value, that it's the value of the user input
-  const handleInputChange = (e) => {
-    setInputTask(e.target.value);
-  };
-
-  // This arrow function it's responsible to save the task created by the user and clear the input field
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    if (inputTask.trim()) {
-      onAddTask(inputTask);
-      setInputTask("");
-    }
-    console.log("New task:", inputTask); // console.log used as a debugging tool
-  };
-
-  return (
-    <div className="flex flex-row justify-stretch w-full">
-      <form onSubmit={handleSubmit} className="w-full">
-        <input
-          className="h-8 mt-10 mb-10 rounded-md w-80"
-          type="text"
-          value={inputTask}
-          onChange={handleInputChange}
-          placeholder="Insert a Task"
-        />
-        <button
-          type="submit"
-          className="px-2 py-1 ml-6 rounded-md text-white font-sans uppercase font-bold  bg-green-600 hover:bg-green-900 duration-300"
-        >
-          Add
-        </button>
-      </form>
-    </div>
-  );
-}
-
-export function TasksList({ tasks, onRemoveTask }) {
-  return (
-    <div>
-      <ul className="w-full">
-        {tasks.map((task) => (
-          <li
-            key={task.id}
-            className="flex flex-row justify-between text-white border-b-2 border-slate-700 border-solid"
-          >
-            <div className="justify-center align-middle py-2">{task.text}</div>
-            <button
-              onClick={() => onRemoveTask(task.id)}
-              className="px-2 py-1 ml-6 rounded-md text-red-900 font-sans uppercase font-bold hover:text-white hover:bg-red-800 duration-300"
-            >
-              X
-            </button>
-          </li>
-        ))}
-      </ul>
     </div>
   );
 }
