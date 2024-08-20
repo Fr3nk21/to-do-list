@@ -3,7 +3,7 @@ import "./styles.css";
 
 function App() {
   return (
-    <div className="App">
+    <div className="flex justify-center align-middle min-h-screen py-40">
       <TasksContainer />
     </div>
   );
@@ -11,6 +11,8 @@ function App() {
 
 export function TasksContainer() {
   const [tasks, setTasks] = useState([]);
+
+  const taskNumber = tasks.length;
 
   // The addTask function adds a new task to the list of tasks by creating an object that includes a unique ID and the task text, and then updates the state with this new list of tasks
   const addTask = (newTask) => {
@@ -26,7 +28,7 @@ export function TasksContainer() {
   return (
     <div className="bg-gray-800 py-10 px-16 rounded-3xl">
       <h1 className="text-4xl text-white font-sans uppercase font-bold tracking-wider">
-        List of your tasks
+        You have {taskNumber} tasks
       </h1>
       <NewTask onAddTask={addTask} />
       <TasksList tasks={tasks} onRemoveTask={removeTask} />
@@ -60,6 +62,7 @@ export function NewTask({ onAddTask }) {
           type="text"
           value={inputTask}
           onChange={handleInputChange}
+          placeholder="Insert a Task"
         />
         <button
           type="submit"
