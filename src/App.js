@@ -12,8 +12,15 @@ function App() {
 export function TasksContainer() {
   const [tasks, setTasks] = useState([]);
 
+  // The addTask function adds a new task to the list of tasks by creating an object that includes a unique ID and the task text, and then updates the state with this new list of tasks
   const addTask = (newTask) => {
-    setTasks([...tasks, newTask]);
+    const taskWithId = { id: Date.now(), text: newTask };
+    setTasks([...tasks, taskWithId]);
+  };
+
+  // The removeTask function removes a task from the list by filtering out the task whose id matches the taskId provided as an argument. After filtering, it updates the state with the new list of tasks that no longer includes the task that was removed
+  const removeTask = (taskId) => {
+    setTasks(tasks.filter((task) => task.id !== taskId));
   };
 
   return (
@@ -22,25 +29,27 @@ export function TasksContainer() {
         List of your tasks
       </h1>
       <NewTask onAddTask={addTask} />
-      <TasksList tasks={tasks} />
-      <ButtonsBanner />
+      <TasksList tasks={tasks} onRemoveTask={removeTask} />
     </div>
   );
 }
 
 export function NewTask({ onAddTask }) {
-  const [inputTask, setInputTask] = useState("");
+  const [inputTask, setInputTask] = useState(""); // This state is responsible to create a string from the "inputTask"
 
+  // This arrow function it's responsible to set the setInputTask to the e.target.value, that it's the value of the user input
   const handleInputChange = (e) => {
     setInputTask(e.target.value);
   };
+
+  // This arrow function it's responsible to save the task created by the user and clear the input field
   const handleSubmit = (e) => {
     e.preventDefault();
     if (inputTask.trim()) {
       onAddTask(inputTask);
       setInputTask("");
     }
-    console.log("New task:", inputTask);
+    console.log("New task:", inputTask); // console.log used as a debugging tool
   };
 
   return (
@@ -58,39 +67,17 @@ export function NewTask({ onAddTask }) {
   );
 }
 
-export function TasksList({ tasks }) {
+export function TasksList({ tasks, onRemoveTask }) {
   return (
     <div className=" text-white">
       <ul>
-        {tasks.map((task, index) => (
-          <li key={index}>{task}</li>
+        {tasks.map((task) => (
+          <li key={task.id}>
+            {task.text}
+            <button onClick={() => onRemoveTask(task.id)}>X</button>
+          </li>
         ))}
       </ul>
-    </div>
-  );
-}
-
-export function ButtonsBanner() {
-  return (
-    <div className="flex-row flex justify-between mt-20">
-      <ButtonPlus />
-      <ButtonMinus />
-    </div>
-  );
-}
-
-export function ButtonPlus() {
-  return (
-    <div className="bg-green-600 text-center px-5 pt-2 pb-3 rounded-full">
-      <span className="text-white text-4xl">+</span>
-    </div>
-  );
-}
-
-export function ButtonMinus() {
-  return (
-    <div className="bg-red-600 text-center px-6 pt-2 pb-4 rounded-full">
-      <span className="text-white text-4xl">-</span>
     </div>
   );
 }
