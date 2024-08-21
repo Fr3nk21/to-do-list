@@ -7,14 +7,21 @@ export default function TasksList({ tasks, onRemoveTask }) {
         {tasks.map((task) => (
           <li
             key={task.id}
-            className="flex flex-row justify-between text-white border-b-2 border-slate-700 border-solid"
+            className="flex flex-row text-white border-b-2 border-slate-700 border-solid py-3"
           >
-            <div className="justify-center align-middle py-2">{task.text}</div>
+            {" "}
+            <input type="checkbox" id="taskNumber" className="my-checkbox" />
+            <label
+              for="taskNumber"
+              className="content-center ml-3 checkbox-label"
+            >
+              {task.text}
+            </label>
             <button
               onClick={() => onRemoveTask(task.id)}
-              className="px-2 py-1 ml-6 rounded-md text-red-900 font-sans uppercase font-bold hover:text-white hover:bg-red-800 duration-300"
+              className="px-2 py-1 ml-auto rounded-md text-red-900 font-sans uppercase font-bold hover:text-white hover:bg-red-800 duration-300"
             >
-              X
+              🗑️
             </button>
           </li>
         ))}
