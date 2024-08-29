@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import NewTask from "./NewTask.js";
 import TasksList from "./TasksList.js";
+import Date from "./Date.js";
 
 export default function TasksContainer() {
   const [tasks, setTasks] = useState([]);
@@ -24,6 +25,7 @@ export default function TasksContainer() {
         You have {taskNumber} tasks
       </h1>
       <NewTask onAddTask={addTask} />
+      <Date />
       <TasksList tasks={tasks} onRemoveTask={removeTask} />
     </div>
   );

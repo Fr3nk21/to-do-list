@@ -1,7 +1,10 @@
 import React, { useState } from "react";
 import "./styles.css";
-
 import TasksContainer from "./components/TasksContainer.js";
+
+//TODO - Fix, style and set in the proper way the Date.js component
+//TODO - Create a tag selector for the task
+//TODO - Create a filter by date/tag for the tasks
 
 function App() {
   return (
