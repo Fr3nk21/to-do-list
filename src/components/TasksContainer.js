@@ -1,14 +1,14 @@
 import React, { useState } from "react";
 import NewTask from "./NewTask.js";
 import TasksList from "./TasksList.js";
-import Date from "./Date.js";
+import DateSelector from "./DateSelector.js";
 import Tag from "./Tag.js";
 import Project from "./Project.js";
 
 export default function TasksContainer() {
   const [tasks, setTasks] = useState([]);
-  const [date, setDate] = useState("");
   const [tag, setTag] = useState("");
+  const [selectedDate, setSelectedDate] = useState("");
 
   const taskNumber = tasks.length;
 
@@ -16,6 +16,10 @@ export default function TasksContainer() {
   const addTask = (newTask) => {
     const taskWithId = { id: Date.now(), text: newTask };
     setTasks([...tasks, taskWithId]);
+  };
+
+  const addTag = (newTag) => {
+    setTag(newTag);
   };
 
   // The removeTask function removes a task from the list by filtering out the task whose id matches the taskId provided as an argument. After filtering, it updates the state with the new list of tasks that no longer includes the task that was removed
@@ -29,10 +33,10 @@ export default function TasksContainer() {
         You have {taskNumber} tasks
       </h1>
       <NewTask onAddTask={addTask} />
-      <Date />
-      <Tag />
+      <DateSelector onDateSelect={setSelectedDate} />
+      <Tag onAddTag={addTag} />
       <Project />
-      <TasksList tasks={tasks} onRemoveTask={removeTask} />
+      <TasksList tasks={tasks} tag={tag} onRemoveTask={removeTask} />
     </div>
   );
 }

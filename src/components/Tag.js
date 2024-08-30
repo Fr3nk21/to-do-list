@@ -1,10 +1,12 @@
 import React, { useState } from "react";
 
-export default function Tag() {
+export default function Tag({ onAddTag }) {
   const [selectedTag, setSelectedTag] = useState("");
 
   const handleSelectChange = (e) => {
-    setSelectedTag(e.target.value);
+    const newTag = e.target.value;
+    setSelectedTag(newTag);
+    onAddTag(newTag);
   };
 
   return (

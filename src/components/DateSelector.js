@@ -1,14 +1,18 @@
 import React, { useState } from "react";
 
-export default function Date() {
+export default function DateSelector({ onDateSelect }) {
   const [selectedDate, setSelectedDate] = useState("");
 
   const handleDateSelection = (e) => {
-    setSelectedDate(e.target.value);
+    const newDate = e.target.value;
+    setSelectedDate(newDate);
+    if (onDateSelect) {
+      onDateSelect(newDate);
+    }
   };
 
   return (
-    <div className="flex flex-row">
+    <div className="flex flex-row items-center">
       <h2 className="text-white pr-4">Select Date:</h2>
       <input
         type="date"
@@ -17,7 +21,7 @@ export default function Date() {
         className="py-1 px-3 rounded-md text-gray-400"
       />
       {selectedDate && (
-        <p className="text-white">You selected: {selectedDate}</p>
+        <p className="text-white ml-4">You selected: {selectedDate}</p>
       )}
     </div>
   );
