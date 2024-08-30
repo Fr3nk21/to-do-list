@@ -3,7 +3,8 @@ import "./styles.css";
 import TasksContainer from "./components/TasksContainer.js";
 
 //TODO - Fix, style and set in the proper way the Date.js component
-//TODO - Create a tag selector for the task
+//TODO - Fix, style and set in the proper way the Tag.js component
+//TODO - Create an option to select the Task's Project filter by date/tag for the tasks
 //TODO - Create a filter by date/tag for the tasks
 
 function App() {

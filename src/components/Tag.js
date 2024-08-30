@@ -16,12 +16,12 @@ export default function Tag() {
         value={selectedTag}
       >
         <option value="">Add a tag</option>
-        <option value="1">1</option>
-        <option value="2">2</option>
-        <option value="3">3</option>
-        <option value="4">4</option>
+        <option value="Tag 1">Tag 1</option>
+        <option value="Tag 2">Tag 2</option>
+        <option value="Tag 3">Tag 3</option>
+        <option value="Tag 4">Tag 4</option>
       </select>
-      {selectedTag && <p className="text-white">You selected: {selectedTag}</p>}
+      {selectedTag && <p className="text-white">Your Tag is: {selectedTag}</p>}
     </div>
   );
 }

@@ -3,6 +3,7 @@ import NewTask from "./NewTask.js";
 import TasksList from "./TasksList.js";
 import Date from "./Date.js";
 import Tag from "./Tag.js";
+import Project from "./Project.js";
 
 export default function TasksContainer() {
   const [tasks, setTasks] = useState([]);
@@ -30,6 +31,7 @@ export default function TasksContainer() {
       <NewTask onAddTask={addTask} />
       <Date />
       <Tag />
+      <Project />
       <TasksList tasks={tasks} onRemoveTask={removeTask} />
     </div>
   );
