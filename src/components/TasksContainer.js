@@ -2,9 +2,12 @@ import React, { useState } from "react";
 import NewTask from "./NewTask.js";
 import TasksList from "./TasksList.js";
 import Date from "./Date.js";
+import Tag from "./Tag.js";
 
 export default function TasksContainer() {
   const [tasks, setTasks] = useState([]);
+  const [date, setDate] = useState("");
+  const [tag, setTag] = useState("");
 
   const taskNumber = tasks.length;
 
@@ -26,6 +29,7 @@ export default function TasksContainer() {
       </h1>
       <NewTask onAddTask={addTask} />
       <Date />
+      <Tag />
       <TasksList tasks={tasks} onRemoveTask={removeTask} />
     </div>
   );
