@@ -1,50 +1,133 @@
 import React, { useState } from "react";
-import NewTask from "./NewTask.js";
 import TasksList from "./TasksList.js";
-import DateSelector from "./DateSelector.js";
-import Tag from "./Tag.js";
-import Project from "./Project.js";
 
 export default function TasksContainer() {
   const [tasks, setTasks] = useState([]);
-  const [tag, setTag] = useState("");
+  const [inputTask, setInputTask] = useState("");
   const [selectedDate, setSelectedDate] = useState("");
+  const [selectedTag, setSelectedTag] = useState("");
+  const [selectedProject, setSelectedProject] = useState("");
 
-  const taskNumber = tasks.length;
+  const tasksNumber = tasks.length; // Tasks's number
 
-  // The addTask function adds a new task to the list of tasks by creating an object that includes a unique ID and the task text, and then updates the state with this new list of tasks
-  const addTask = (newTask) => {
-    const taskWithId = { id: Date.now(), text: newTask };
+  // Handlers
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    const taskWithId = {
+      id: Date.now(),
+      text: inputTask,
+    };
     setTasks([...tasks, taskWithId]);
+    if (inputTask.trim()) {
+      setInputTask("");
+    }
   };
 
-  // The removeTask function removes a task from the list by filtering out the task whose id matches the taskId provided as an argument. After filtering, it updates the state with the new list of tasks that no longer includes the task that was removed
+  const handleInputChange = (e) => {
+    setInputTask(e.target.value);
+  };
+
+  const handleDateSelection = (e) => {
+    setSelectedDate(e.target.value);
+  };
+
+  const handleTagChange = (e) => {
+    setSelectedTag(e.target.value);
+  };
+
+  const handleProjectChange = (e) => {
+    setSelectedProject(e.target.value);
+  };
+
   const removeTask = (taskId) => {
     setTasks(tasks.filter((task) => task.id !== taskId));
-  };
-
-  const addTag = (newTag) => {
-    setTag(newTag);
-  };
-
-  const addSetSelectedDate = (newDate) => {
-    setSelectedDate(newDate);
   };
 
   return (
     <div className="bg-gray-800 py-10 px-16 rounded-3xl">
       <h1 className="text-4xl text-white font-sans uppercase font-bold tracking-wider">
-        You have {taskNumber} tasks
+        You have {tasksNumber} tasks
       </h1>
-      <NewTask onAddTask={addTask} />
-      <DateSelector onDateSelect={addSetSelectedDate} />
-      <Tag onAddTag={addTag} />
-      <Project />
+
+      {/* Task's name component */}
+      <div className="flex flex-row justify-stretch w-full">
+        <form onSubmit={handleSubmit} className="w-full">
+          <input
+            className="h-8 mt-10 mb-10 rounded-md w-80"
+            type="text"
+            value={inputTask}
+            onChange={handleInputChange}
+            placeholder="Insert a Task"
+          />
+          <button
+            type="submit"
+            className="px-2 py-1 ml-6 rounded-md text-white font-sans uppercase font-bold bg-green-600 hover:bg-green-900 duration-300"
+          >
+            Add
+          </button>
+        </form>
+      </div>
+
+      {/* Task's date component */}
+      <div className="flex flex-row items-center">
+        <h2 className="text-white pr-4">Select Date:</h2>
+        <input
+          type="date"
+          value={selectedDate}
+          onChange={handleDateSelection}
+          className="py-1 px-3 rounded-md text-gray-400"
+        />
+        {selectedDate && (
+          <p className="text-white ml-4">You selected: {selectedDate}</p>
+        )}
+      </div>
+
+      {/* Task's tag component */}
+      <div>
+        <select
+          name="tag"
+          className="py-2 px-3 rounded-md text-gray-400"
+          onChange={handleTagChange}
+          value={selectedTag}
+        >
+          <option value=""></option>
+          <option value="Tag 1">Tag 1</option>
+          <option value="Tag 2">Tag 2</option>
+          <option value="Tag 3">Tag 3</option>
+          <option value="Tag 4">Tag 4</option>
+        </select>
+        {selectedTag && (
+          <p className="text-white">Your tag is: {selectedTag}</p>
+        )}
+      </div>
+
+      {/* Task's project component */}
+      <div>
+        <select
+          name="project"
+          className="py-2 px-3 rounded-md text-gray-400"
+          onChange={handleProjectChange}
+          value={selectedProject}
+        >
+          <option value="">Select a Project</option>
+          <option value="Project 1">Project 1</option>
+          <option value="Project 2">Project 2</option>
+          <option value="Project 3">Project 3</option>
+          <option value="Project 4">Project 4</option>
+        </select>
+        {selectedProject && (
+          <p className="text-white">Your Project is: {selectedProject}</p>
+        )}
+      </div>
+
+      {/* TasksList component */}
       <TasksList
         tasks={tasks}
-        tag={tag}
-        selectedDate={selectedDate}
         onRemoveTask={removeTask}
+        inputTask={inputTask}
+        selectedDate={selectedDate}
+        selectedTag={selectedTag}
+        selectedProject={selectedProject}
       />
     </div>
   );

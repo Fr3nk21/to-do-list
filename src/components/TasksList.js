@@ -1,6 +1,13 @@
 import React, { useState } from "react";
 
-export default function TasksList({ tasks, tag, onRemoveTask, selectedDate }) {
+export default function TasksList({
+  tasks,
+  onRemoveTask,
+  inputTask,
+  selectedDate,
+  selectedTag,
+  selectedProject,
+}) {
   return (
     <div>
       <ul className="w-full">
@@ -16,8 +23,10 @@ export default function TasksList({ tasks, tag, onRemoveTask, selectedDate }) {
               className="content-center ml-3 checkbox-label"
             >
               {task.text}
-              {tag}
+              {inputTask}
               {selectedDate}
+              {selectedTag}
+              {selectedProject}
             </label>
             <button
               onClick={() => onRemoveTask(task.id)}
