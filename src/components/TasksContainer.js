@@ -18,13 +18,17 @@ export default function TasksContainer() {
     setTasks([...tasks, taskWithId]);
   };
 
+  // The removeTask function removes a task from the list by filtering out the task whose id matches the taskId provided as an argument. After filtering, it updates the state with the new list of tasks that no longer includes the task that was removed
+  const removeTask = (taskId) => {
+    setTasks(tasks.filter((task) => task.id !== taskId));
+  };
+
   const addTag = (newTag) => {
     setTag(newTag);
   };
 
-  // The removeTask function removes a task from the list by filtering out the task whose id matches the taskId provided as an argument. After filtering, it updates the state with the new list of tasks that no longer includes the task that was removed
-  const removeTask = (taskId) => {
-    setTasks(tasks.filter((task) => task.id !== taskId));
+  const addSetSelectedDate = (newDate) => {
+    setSelectedDate(newDate);
   };
 
   return (
@@ -33,10 +37,15 @@ export default function TasksContainer() {
         You have {taskNumber} tasks
       </h1>
       <NewTask onAddTask={addTask} />
-      <DateSelector onDateSelect={setSelectedDate} />
+      <DateSelector onDateSelect={addSetSelectedDate} />
       <Tag onAddTag={addTag} />
       <Project />
-      <TasksList tasks={tasks} tag={tag} onRemoveTask={removeTask} />
+      <TasksList
+        tasks={tasks}
+        tag={tag}
+        selectedDate={selectedDate}
+        onRemoveTask={removeTask}
+      />
     </div>
   );
 }
