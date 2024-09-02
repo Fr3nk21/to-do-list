@@ -1,10 +1,12 @@
 import React, { useState } from "react";
 import TasksList from "./TasksList.js";
+import DatePicker from "react-datepicker";
+import "react-datepicker/dist/react-datepicker.css";
 
 export default function TasksContainer() {
   const [tasks, setTasks] = useState([]);
   const [inputTask, setInputTask] = useState("");
-  const [selectedDate, setSelectedDate] = useState("");
+  const [selectedDate, setSelectedDate] = useState(null);
   const [selectedTag, setSelectedTag] = useState("");
   const [selectedProject, setSelectedProject] = useState("");
   const [showError, setShowError] = useState(false);
@@ -27,7 +29,7 @@ export default function TasksContainer() {
       };
       setTasks([...tasks, taskWithId]);
       setInputTask("");
-      setSelectedDate("");
+      setSelectedDate(null);
       setSelectedTag("");
       setSelectedProject("");
     }
@@ -37,9 +39,9 @@ export default function TasksContainer() {
     setInputTask(e.target.value);
   };
 
-  const handleDateSelection = (e) => {
-    setSelectedDate(e.target.value);
-  };
+  // const handleDateSelection = (date) => {
+  //   setSelectedDate(date);
+  // };
 
   const handleTagChange = (e) => {
     setSelectedTag(e.target.value);
@@ -84,17 +86,25 @@ export default function TasksContainer() {
       {/* Task's date component */}
       <div className="flex flex-row items-center">
         <h2 className="text-white pr-4">Select Date:</h2>
-        <input
+        <DatePicker
+          id="taskDate"
+          selected={selectedDate}
+          onChange={(date) => setSelectedDate(date)}
+          className="py-1 px-3 rounded-md text-gray-400"
+          dateFormat="yyyy/MM/dd"
+          placeholderText="Select a date"
+          aria-label="taskDate"
+        />
+        {/* <input
           id="taskDate"
           type="datetime-local"
           value={selectedDate}
           onChange={handleDateSelection}
           className="py-1 px-3 rounded-md text-gray-400"
           aria-label="taskDate"
-          onfocus="(this.type='date')"
-          placeholder="Date"
-        />
-        {selectedDate && console.log(`You selected: ${selectedDate}`)}
+        /> */}
+        {selectedDate &&
+          console.log(`You selected: ${selectedDate.toLocaleDateString()}`)}
       </div>
 
       {/* Task's tag component */}
