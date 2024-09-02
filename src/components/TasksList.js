@@ -1,4 +1,6 @@
 import React, { useState } from "react";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faUser } from "@fortawesome/free-solid-svg-icons";
 
 export default function TasksList({
   tasks,
@@ -27,6 +29,7 @@ export default function TasksList({
               {selectedDate}
               {selectedTag}
               {selectedProject}
+              <FontAwesomeIcon icon={faUser} />
             </label>
             <button
               onClick={() => onRemoveTask(task.id)}
