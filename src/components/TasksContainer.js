@@ -7,19 +7,25 @@ export default function TasksContainer() {
   const [selectedDate, setSelectedDate] = useState("");
   const [selectedTag, setSelectedTag] = useState("");
   const [selectedProject, setSelectedProject] = useState("");
+  const [showError, setShowError] = useState(false);
 
   const tasksNumber = tasks.length; // Tasks's number
 
   // Handlers
   const handleSubmit = (e) => {
     e.preventDefault();
-    const taskWithId = {
-      id: Date.now(),
-      text: inputTask,
-    };
-    setTasks([...tasks, taskWithId]);
-    if (inputTask.trim()) {
-      setInputTask("");
+    if (inputTask === "") {
+      setShowError(true);
+    } else {
+      setShowError(false);
+      const taskWithId = {
+        id: Date.now(),
+        text: inputTask,
+      };
+      setTasks([...tasks, taskWithId]);
+      if (inputTask.trim()) {
+        setInputTask("");
+      }
     }
   };
 
@@ -65,6 +71,7 @@ export default function TasksContainer() {
           >
             Add
           </button>
+          {showError && <p className="text-red-500">Error message</p>}
         </form>
       </div>
 
