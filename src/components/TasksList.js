@@ -1,6 +1,11 @@
 import React, { useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faUser } from "@fortawesome/free-solid-svg-icons";
+import {
+  faCalendar,
+  faTag,
+  faFolder,
+  faX,
+} from "@fortawesome/free-solid-svg-icons";
 
 export default function TasksList({
   tasks,
@@ -16,27 +21,39 @@ export default function TasksList({
         {tasks.map((task) => (
           <li
             key={task.id}
-            className="flex flex-row text-white border-b-2 border-slate-700 border-solid py-3"
+            className="flex flex-row text-white border-b-2 border-slate-700 border-solid py-3 justify-between"
           >
             {" "}
-            <input type="checkbox" id="taskNumber" className="my-checkbox" />
-            <label
-              for="taskNumber"
-              className="content-center ml-3 checkbox-label"
-            >
-              {task.text}
-              {inputTask}
-              {selectedDate}
-              {selectedTag}
-              {selectedProject}
-              <FontAwesomeIcon icon={faUser} />
-            </label>
-            <button
-              onClick={() => onRemoveTask(task.id)}
-              className="px-2 py-1 ml-auto rounded-md text-red-900 font-sans uppercase font-bold hover:text-white hover:bg-red-800 duration-300"
-            >
-              🗑️
-            </button>
+            <div>
+              <input type="checkbox" id="taskNumber" className="my-checkbox" />
+              <label
+                for="taskNumber"
+                className="content-center ml-3 checkbox-label"
+              >
+                {task.text}
+                {inputTask}
+                {selectedDate}
+                {selectedTag}
+                {selectedProject}
+              </label>
+            </div>
+            <div>
+              <button className="py-1 pr-3 ml-auto rounded-md text-white font-sans uppercase font-bold">
+                <FontAwesomeIcon icon={faCalendar} />
+              </button>
+              <button className="py-1 pr-3 ml-auto rounded-md text-white font-sans uppercase font-bold">
+                <FontAwesomeIcon icon={faTag} />
+              </button>
+              <button className="py-1 pr-3 ml-auto rounded-md text-white font-sans uppercase font-bold">
+                <FontAwesomeIcon icon={faFolder} />
+              </button>
+              <button
+                onClick={() => onRemoveTask(task.id)}
+                className="px-2 ml-auto rounded-md text-red-900 font-sans uppercase font-bold hover:text-white hover:bg-red-800 duration-300"
+              >
+                <FontAwesomeIcon icon={faX} />
+              </button>
+            </div>
           </li>
         ))}
       </ul>
