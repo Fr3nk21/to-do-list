@@ -58,12 +58,15 @@ export default function TasksContainer() {
       {/* Task's name component */}
       <div className="flex flex-row justify-stretch w-full">
         <form onSubmit={handleSubmit} className="w-full">
+          <label htmlFor="userTask"></label>
           <input
+            id="userTask"
             className="h-8 mt-10 mb-10 rounded-md w-80"
             type="text"
             value={inputTask}
             onChange={handleInputChange}
             placeholder="Insert a Task"
+            aria-label="userTask"
           />
           <button
             type="submit"
@@ -78,11 +81,14 @@ export default function TasksContainer() {
       {/* Task's date component */}
       <div className="flex flex-row items-center">
         <h2 className="text-white pr-4">Select Date:</h2>
+        <label htmlFor="taskDate"></label>
         <input
+          id="taskDate"
           type="date"
           value={selectedDate}
           onChange={handleDateSelection}
           className="py-1 px-3 rounded-md text-gray-400"
+          aria-label="taskDate"
         />
         {selectedDate && (
           <p className="text-white ml-4">You selected: {selectedDate}</p>
