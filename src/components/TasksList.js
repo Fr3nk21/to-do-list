@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faCalendar,
@@ -7,14 +7,7 @@ import {
   faX,
 } from "@fortawesome/free-solid-svg-icons";
 
-export default function TasksList({
-  tasks,
-  onRemoveTask,
-  inputTask,
-  selectedDate,
-  selectedTag,
-  selectedProject,
-}) {
+export default function TasksList({ tasks, onRemoveTask }) {
   return (
     <div>
       <ul className="w-full">
@@ -31,11 +24,10 @@ export default function TasksList({
                 className="content-center ml-3 checkbox-label"
               >
                 {task.text}
-                {inputTask}
-                {selectedDate}
-                {selectedTag}
-                {selectedProject}
               </label>
+              {task.date && <p>Date: {task.date}</p>}
+              {task.tag && <p>Tag: {task.tag}</p>}
+              {task.project && <p>Project: {task.project}</p>}
             </div>
             <div>
               <button className="py-1 pr-3 ml-auto rounded-md text-white font-sans uppercase font-bold">

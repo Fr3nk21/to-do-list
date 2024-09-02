@@ -21,11 +21,15 @@ export default function TasksContainer() {
       const taskWithId = {
         id: Date.now(),
         text: inputTask,
+        date: selectedDate,
+        tag: selectedTag,
+        project: selectedProject,
       };
       setTasks([...tasks, taskWithId]);
-      if (inputTask.trim()) {
-        setInputTask("");
-      }
+      setInputTask("");
+      setSelectedDate("");
+      setSelectedTag("");
+      setSelectedProject("");
     }
   };
 
@@ -58,7 +62,6 @@ export default function TasksContainer() {
       {/* Task's name component */}
       <div className="flex flex-row justify-stretch w-full">
         <form onSubmit={handleSubmit} className="w-full">
-          <label htmlFor="userTask"></label>
           <input
             id="userTask"
             className="h-8 mt-10 mb-10 rounded-md w-80"
@@ -81,18 +84,17 @@ export default function TasksContainer() {
       {/* Task's date component */}
       <div className="flex flex-row items-center">
         <h2 className="text-white pr-4">Select Date:</h2>
-        <label htmlFor="taskDate"></label>
         <input
           id="taskDate"
-          type="date"
+          type="datetime-local"
           value={selectedDate}
           onChange={handleDateSelection}
           className="py-1 px-3 rounded-md text-gray-400"
           aria-label="taskDate"
+          onfocus="(this.type='date')"
+          placeholder="Date"
         />
-        {selectedDate && (
-          <p className="text-white ml-4">You selected: {selectedDate}</p>
-        )}
+        {selectedDate && console.log(`You selected: ${selectedDate}`)}
       </div>
 
       {/* Task's tag component */}
@@ -109,9 +111,7 @@ export default function TasksContainer() {
           <option value="Tag 3">Tag 3</option>
           <option value="Tag 4">Tag 4</option>
         </select>
-        {selectedTag && (
-          <p className="text-white">Your tag is: {selectedTag}</p>
-        )}
+        {selectedTag && console.log(`Your tag is: ${selectedTag}`)}
       </div>
 
       {/* Task's project component */}
@@ -128,20 +128,11 @@ export default function TasksContainer() {
           <option value="Project 3">Project 3</option>
           <option value="Project 4">Project 4</option>
         </select>
-        {selectedProject && (
-          <p className="text-white">Your Project is: {selectedProject}</p>
-        )}
+        {selectedProject && console.log(`Your project is: ${selectedProject}`)}
       </div>
 
       {/* TasksList component */}
-      <TasksList
-        tasks={tasks}
-        onRemoveTask={removeTask}
-        inputTask={inputTask}
-        selectedDate={selectedDate}
-        selectedTag={selectedTag}
-        selectedProject={selectedProject}
-      />
+      <TasksList tasks={tasks} onRemoveTask={removeTask} />
     </div>
   );
 }
