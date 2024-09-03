@@ -14,7 +14,7 @@ export default function TasksList({ tasks, onRemoveTask }) {
         {tasks.map((task) => (
           <li
             key={task.id}
-            className="flex flex-row text-white border-b-2 border-slate-700 border-solid py-3 justify-between"
+            className="flex flex-row text-white border-b-2 border-slate-700 border-solid pt-6 pb-1 justify-between"
           >
             <div>
               <input type="checkbox" id="taskNumber" className="my-checkbox" />
@@ -23,22 +23,29 @@ export default function TasksList({ tasks, onRemoveTask }) {
                 className="content-center ml-3 checkbox-label"
               >
                 {task.text}
-                {task.date && (
-                  <p>Date: {task.date.toLocaleDateString("en-US")}</p>
-                )}
-                {task.tag && <p>Tag: {task.tag}</p>}
-                {task.project && <p>Project: {task.project}</p>}
+                {task.date && <p>{task.date.toLocaleDateString("en-US")}</p>}
+                {task.tag && <p>{task.tag}</p>}
+                {task.project && <p>{task.project}</p>}
               </label>
             </div>
             <div>
               <button className="py-1 pr-3 ml-auto rounded-md text-white font-sans uppercase font-bold">
-                <FontAwesomeIcon icon={faCalendar} />
+                <FontAwesomeIcon
+                  icon={faCalendar}
+                  className={task.date && "text-red-600"}
+                />
               </button>
               <button className="py-1 pr-3 ml-auto rounded-md text-white font-sans uppercase font-bold">
-                <FontAwesomeIcon icon={faTag} />
+                <FontAwesomeIcon
+                  icon={faTag}
+                  className={task.tag && "text-red-600"}
+                />
               </button>
               <button className="py-1 pr-3 ml-auto rounded-md text-white font-sans uppercase font-bold">
-                <FontAwesomeIcon icon={faFolder} />
+                <FontAwesomeIcon
+                  icon={faFolder}
+                  className={task.project && "text-red-600"}
+                />
               </button>
               <button
                 onClick={() => onRemoveTask(task.id)}

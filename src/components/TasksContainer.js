@@ -2,6 +2,13 @@ import React, { useState } from "react";
 import TasksList from "./TasksList.js";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import {
+  faCalendar,
+  faTag,
+  faFolder,
+  faX,
+} from "@fortawesome/free-solid-svg-icons";
 
 export default function TasksContainer() {
   const [tasks, setTasks] = useState([]);
@@ -62,11 +69,11 @@ export default function TasksContainer() {
       </h1>
 
       {/* Task's name component */}
-      <div className="flex flex-row justify-stretch w-full">
+      <div className="flex flex-row justify-stretch">
         <form onSubmit={handleSubmit} className="w-full">
           <input
             id="userTask"
-            className="h-8 mt-10 mb-10 rounded-md w-80"
+            className="h-8 mt-10 mb-6 rounded-md w-80"
             type="text"
             value={inputTask}
             onChange={handleInputChange}
@@ -79,30 +86,21 @@ export default function TasksContainer() {
           >
             Add
           </button>
-          {showError && <p className="text-red-500">Error message</p>}
         </form>
       </div>
 
       {/* Task's date component */}
-      <div className="flex flex-row items-center">
-        <h2 className="text-white pr-4">Select Date:</h2>
+      <div className="flex flex-row items-center min-w-fit mb-6">
+        {/* <h2 className="text-white pr-4">Select Date:</h2> */}
         <DatePicker
           id="taskDate"
           selected={selectedDate}
           onChange={(date) => setSelectedDate(date)}
-          className="py-1 px-3 rounded-md text-gray-400"
+          className="py-1 px-3 rounded-md text-gray-400 w-96"
           dateFormat="yyyy/MM/dd"
           placeholderText="Select a date"
           aria-label="taskDate"
         />
-        {/* <input
-          id="taskDate"
-          type="datetime-local"
-          value={selectedDate}
-          onChange={handleDateSelection}
-          className="py-1 px-3 rounded-md text-gray-400"
-          aria-label="taskDate"
-        /> */}
         {selectedDate &&
           console.log(`You selected: ${selectedDate.toLocaleDateString()}`)}
       </div>
@@ -111,11 +109,11 @@ export default function TasksContainer() {
       <div>
         <select
           name="tag"
-          className="py-2 px-3 rounded-md text-gray-400"
+          className="py-2 px-3 rounded-md text-gray-400 w-full mb-6"
           onChange={handleTagChange}
           value={selectedTag}
         >
-          <option value=""></option>
+          <option value="">Select a Tag</option>
           <option value="Tag 1">Tag 1</option>
           <option value="Tag 2">Tag 2</option>
           <option value="Tag 3">Tag 3</option>
@@ -128,7 +126,7 @@ export default function TasksContainer() {
       <div>
         <select
           name="project"
-          className="py-2 px-3 rounded-md text-gray-400"
+          className="py-2 px-3 rounded-md text-gray-400 w-full"
           onChange={handleProjectChange}
           value={selectedProject}
         >
@@ -142,6 +140,11 @@ export default function TasksContainer() {
       </div>
 
       {/* TasksList component */}
+      {showError && (
+        <p className="text-red-900 bg-red-400 p-4 mt-6 rounded-md font-sans font-bold">
+          Please, insert a task!
+        </p>
+      )}
       <TasksList tasks={tasks} onRemoveTask={removeTask} />
     </div>
   );
