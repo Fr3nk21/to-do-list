@@ -1,4 +1,5 @@
 import React from "react";
+import CalendarIcon from "./CalendarIcon.js";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faCalendar,
@@ -29,12 +30,13 @@ export default function TasksList({ tasks, onRemoveTask }) {
               </label>
             </div>
             <div>
-              <button className="py-1 pr-3 ml-auto rounded-md text-white font-sans uppercase font-bold">
+              {/* <button className="py-1 pr-3 ml-auto rounded-md text-white font-sans uppercase font-bold">
                 <FontAwesomeIcon
                   icon={faCalendar}
                   className={task.date && "text-red-600"}
                 />
-              </button>
+              </button> */}
+              <CalendarIcon />
               <button className="py-1 pr-3 ml-auto rounded-md text-white font-sans uppercase font-bold">
                 <FontAwesomeIcon
                   icon={faTag}
