@@ -1,5 +1,7 @@
 import React from "react";
 import CalendarIcon from "./CalendarIcon.js";
+import TagIcon from "./TagIcon.js";
+import FolderIcon from "./FolderIcon.js";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faCalendar,
@@ -29,26 +31,10 @@ export default function TasksList({ tasks, onRemoveTask }) {
                 {task.project && <p>{task.project}</p>}
               </label>
             </div>
-            <div>
-              {/* <button className="py-1 pr-3 ml-auto rounded-md text-white font-sans uppercase font-bold">
-                <FontAwesomeIcon
-                  icon={faCalendar}
-                  className={task.date && "text-red-600"}
-                />
-              </button> */}
+            <div className="flex flex-row">
               <CalendarIcon />
-              <button className="py-1 pr-3 ml-auto rounded-md text-white font-sans uppercase font-bold">
-                <FontAwesomeIcon
-                  icon={faTag}
-                  className={task.tag && "text-red-600"}
-                />
-              </button>
-              <button className="py-1 pr-3 ml-auto rounded-md text-white font-sans uppercase font-bold">
-                <FontAwesomeIcon
-                  icon={faFolder}
-                  className={task.project && "text-red-600"}
-                />
-              </button>
+              <TagIcon />
+              <FolderIcon />
               <button
                 onClick={() => onRemoveTask(task.id)}
                 className="px-2 ml-auto rounded-md text-red-900 font-sans uppercase font-bold hover:text-white hover:bg-red-800 duration-300"
