@@ -1,21 +1,21 @@
 import React, { useState } from "react";
 import TasksList from "./TasksList.js";
-import DatePicker from "react-datepicker";
-import "react-datepicker/dist/react-datepicker.css";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import {
-  faCalendar,
-  faTag,
-  faFolder,
-  faX,
-} from "@fortawesome/free-solid-svg-icons";
+// import DatePicker from "react-datepicker";
+// import "react-datepicker/dist/react-datepicker.css";
+// import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+// import {
+//   faCalendar,
+//   faTag,
+//   faFolder,
+//   faX,
+// } from "@fortawesome/free-solid-svg-icons";
 
 export default function TasksContainer() {
   const [tasks, setTasks] = useState([]);
   const [inputTask, setInputTask] = useState("");
-  const [selectedDate, setSelectedDate] = useState(null);
-  const [selectedTag, setSelectedTag] = useState("");
-  const [selectedProject, setSelectedProject] = useState("");
+  // const [selectedDate, setSelectedDate] = useState(null);
+  // const [selectedTag, setSelectedTag] = useState("");
+  // const [selectedProject, setSelectedProject] = useState("");
   const [showError, setShowError] = useState(false);
 
   const tasksNumber = tasks.length; // Tasks's number
@@ -30,15 +30,15 @@ export default function TasksContainer() {
       const taskWithId = {
         id: Date.now(),
         text: inputTask,
-        date: selectedDate,
-        tag: selectedTag,
-        project: selectedProject,
+        // date: selectedDate,
+        // tag: selectedTag,
+        // project: selectedProject,
       };
       setTasks([...tasks, taskWithId]);
       setInputTask("");
-      setSelectedDate(null);
-      setSelectedTag("");
-      setSelectedProject("");
+      // setSelectedDate(null);
+      // setSelectedTag("");
+      // setSelectedProject("");
     }
   };
 
@@ -50,13 +50,13 @@ export default function TasksContainer() {
   //   setSelectedDate(date);
   // };
 
-  const handleTagChange = (e) => {
-    setSelectedTag(e.target.value);
-  };
+  // const handleTagChange = (e) => {
+  //   setSelectedTag(e.target.value);
+  // };
 
-  const handleProjectChange = (e) => {
-    setSelectedProject(e.target.value);
-  };
+  // const handleProjectChange = (e) => {
+  //   setSelectedProject(e.target.value);
+  // };
 
   const removeTask = (taskId) => {
     setTasks(tasks.filter((task) => task.id !== taskId));
@@ -90,8 +90,7 @@ export default function TasksContainer() {
       </div>
 
       {/* Task's date component */}
-      <div className="flex flex-row items-center min-w-fit mb-6">
-        {/* <h2 className="text-white pr-4">Select Date:</h2> */}
+      {/* <div className="flex flex-row items-center min-w-fit mb-6">
         <DatePicker
           id="taskDate"
           selected={selectedDate}
@@ -103,10 +102,10 @@ export default function TasksContainer() {
         />
         {selectedDate &&
           console.log(`You selected: ${selectedDate.toLocaleDateString()}`)}
-      </div>
+      </div> */}
 
       {/* Task's tag component */}
-      <div>
+      {/* <div>
         <select
           name="tag"
           className="py-2 px-3 rounded-md text-gray-400 w-full mb-6"
@@ -120,10 +119,10 @@ export default function TasksContainer() {
           <option value="Tag 4">Tag 4</option>
         </select>
         {selectedTag && console.log(`Your tag is: ${selectedTag}`)}
-      </div>
+      </div> */}
 
       {/* Task's project component */}
-      <div>
+      {/* <div>
         <select
           name="project"
           className="py-2 px-3 rounded-md text-gray-400 w-full"
@@ -137,7 +136,7 @@ export default function TasksContainer() {
           <option value="Project 4">Project 4</option>
         </select>
         {selectedProject && console.log(`Your project is: ${selectedProject}`)}
-      </div>
+      </div> */}
 
       {/* TasksList component */}
       {showError && (

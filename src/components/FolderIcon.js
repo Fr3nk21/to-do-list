@@ -49,6 +49,7 @@ export default function FolderIcon() {
             onChange={handleTagChange}
             value={selectedProject}
           >
+            <option value="">Select a Project</option>
             <option value="Project 1">Project 1</option>
             <option value="Project 2">Project 2</option>
             <option value="Project 3">Project 3</option>
