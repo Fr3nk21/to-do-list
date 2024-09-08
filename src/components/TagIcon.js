@@ -35,15 +35,15 @@ export default function TagIcon() {
   return (
     <div ref={tagRef} className="relative">
       <button
-        className="py-1 pr-3 ml-auto rounded-md text-white font-sans uppercase font-bold"
+        className="py-1 pr-3 ml-auto rounded-md text-white font-sans uppercase"
         onClick={handleIconClick}
       >
         <div
-          className={`w-16 bg-red-400 absolute -top-6 -left-7 rounded-md ${
+          className={`w-16 bg-red-400 absolute -top-8 -left-7 rounded-md ${
             isHovered && selectedTag ? "visible" : "hidden"
           }`}
         >
-          <p>{selectedTag}</p>
+          <p className="py-1 px-2">{selectedTag}</p>
         </div>
         <div
           onMouseEnter={() => setIsHovered(true)}

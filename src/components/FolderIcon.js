@@ -35,15 +35,15 @@ export default function FolderIcon() {
   return (
     <div ref={projectRef} className="relative">
       <button
-        className="py-1 pr-3 ml-auto rounded-md text-white font-sans uppercase font-bold"
+        className="py-1 pr-3 ml-auto rounded-md text-white font-sans uppercase"
         onClick={handleIconClick}
       >
         <div
-          className={`w-28 bg-red-400 absolute -top-6 -left-12 rounded-md ${
+          className={`w-28 bg-red-400 absolute -top-8 -left-12 rounded-md ${
             isHovered && selectedProject ? "visible" : "hidden"
           }`}
         >
-          <p>{selectedProject}</p>
+          <p className="py-1 px-2">{selectedProject}</p>
         </div>
         <div
           onMouseEnter={() => setIsHovered(true)}
