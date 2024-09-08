@@ -15,3 +15,11 @@ input {
 .my-checkbox:checked + .checkbox-label {
   text-decoration: line-through;
 }
+
+.hidden {
+  display: none;
+}
+
+.visible {
+  display: block;
+}

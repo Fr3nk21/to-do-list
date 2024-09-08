@@ -1,11 +1,15 @@
 import React, { useState, useRef } from "react";
+import "/Users/fr3nk/Documents/GitHub/my-projects/to-do-list/src/styles.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faTag } from "@fortawesome/free-solid-svg-icons";
+
+// TODO - Hover display logic: The logic for showing and hiding the div with style={style} when hovering over the icon might not behave as expected. You are manually controlling the style.display using setStyle. Sometimes React's state updates might cause delays in UI changes, and managing the display directly can be tricky. Have you considered using CSS classes to toggle visibility instead? What might be an alternative approach to handle this hover state?
 
 export default function TagIcon() {
   const [selectedTag, setSelectedTag] = useState("");
   const [isOpen, setIsOpen] = useState(false);
-  const [style, setStyle] = useState({ display: "none" });
+  const [isHovered, setIsHovered] = useState(false);
+  // const [style, setStyle] = useState({ display: "none" });
   const tagRef = useRef(null);
 
   const handleIconClick = (e) => {
@@ -19,8 +23,8 @@ export default function TagIcon() {
     }
   };
 
-  const handleTagChange = (tag) => {
-    setSelectedTag(tag);
+  const handleTagChange = (e) => {
+    setSelectedTag(e.target.value);
     setIsOpen(false);
   };
 
@@ -37,7 +41,7 @@ export default function TagIcon() {
         className="py-1 pr-3 ml-auto rounded-md text-white font-sans uppercase font-bold"
         onClick={handleIconClick}
       >
-        <div
+        {/* <div
           style={style}
           className="w-72 h-10 bg-red-400 absolute -top-10 -left-32"
         >
@@ -54,12 +58,29 @@ export default function TagIcon() {
         >
           <FontAwesomeIcon
             icon={faTag}
-            className={selectedTag && "text-red-500"}
+            className={selectedTag === "" ? "text-white" : "text-red-500"}
+          />
+        </div> */}
+        <div
+          className={`w-72 h-10 bg-red-400 absolute -top-10 -left-32 ${
+            isHovered ? "visible" : "hidden"
+          }`}
+        >
+          <p>You select: {selectedTag}</p>
+        </div>
+        <div
+          className="bg-blue-400 w-10"
+          onMouseEnter={() => setIsHovered(true)}
+          onMouseLeave={() => setIsHovered(false)}
+        >
+          <FontAwesomeIcon
+            icon={faTag}
+            className={selectedTag ? "text-red-500" : ""}
           />
         </div>
-
-        {/* <ShowButtonHover /> */}
       </button>
+
+      {/* <ShowButtonHover /> */}
       {isOpen && (
         <div className="absolute top-10 right-0 z-10 w-36">
           <select
