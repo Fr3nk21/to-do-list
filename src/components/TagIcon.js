@@ -3,8 +3,6 @@ import "/Users/fr3nk/Documents/GitHub/my-projects/to-do-list/src/styles.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faTag } from "@fortawesome/free-solid-svg-icons";
 
-// TODO - Hover display logic: The logic for showing and hiding the div with style={style} when hovering over the icon might not behave as expected. You are manually controlling the style.display using setStyle. Sometimes React's state updates might cause delays in UI changes, and managing the display directly can be tricky. Have you considered using CSS classes to toggle visibility instead? What might be an alternative approach to handle this hover state?
-
 export default function TagIcon() {
   const [selectedTag, setSelectedTag] = useState("");
   const [isOpen, setIsOpen] = useState(false);
@@ -62,14 +60,13 @@ export default function TagIcon() {
           />
         </div> */}
         <div
-          className={`w-72 h-10 bg-red-400 absolute -top-10 -left-32 ${
-            isHovered ? "visible" : "hidden"
+          className={`w-16 bg-red-400 absolute -top-6 -left-7 rounded-md ${
+            isHovered && selectedTag ? "visible" : "hidden"
           }`}
         >
-          <p>You select: {selectedTag}</p>
+          <p>{selectedTag}</p>
         </div>
         <div
-          className="bg-blue-400 w-10"
           onMouseEnter={() => setIsHovered(true)}
           onMouseLeave={() => setIsHovered(false)}
         >
