@@ -1,10 +1,12 @@
 import React, { useState, useRef } from "react";
+import "/Users/fr3nk/Documents/GitHub/my-projects/to-do-list/src/styles.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faFolder } from "@fortawesome/free-solid-svg-icons";
 
 export default function FolderIcon() {
   const [selectedProject, setSelectedProject] = useState("");
   const [isOpen, setIsOpen] = useState(false);
+  const [isHovered, setIsHovered] = useState(false);
   const projectRef = useRef(null);
 
   const handleIconClick = (e) => {
@@ -18,8 +20,8 @@ export default function FolderIcon() {
     }
   };
 
-  const handleTagChange = (project) => {
-    setSelectedProject(project);
+  const handleTagChange = (e) => {
+    setSelectedProject(e.target.value);
     setIsOpen(false);
   };
 
@@ -36,10 +38,22 @@ export default function FolderIcon() {
         className="py-1 pr-3 ml-auto rounded-md text-white font-sans uppercase font-bold"
         onClick={handleIconClick}
       >
-        <FontAwesomeIcon
-          icon={faFolder}
-          className={selectedProject && "text-red-500"}
-        />
+        <div
+          className={`w-28 bg-red-400 absolute -top-6 -left-12 rounded-md ${
+            isHovered && selectedProject ? "visible" : "hidden"
+          }`}
+        >
+          <p>{selectedProject}</p>
+        </div>
+        <div
+          onMouseEnter={() => setIsHovered(true)}
+          onMouseLeave={() => setIsHovered(false)}
+        >
+          <FontAwesomeIcon
+            icon={faFolder}
+            className={selectedProject ? "text-red-500" : ""}
+          />
+        </div>
       </button>
       {isOpen && (
         <div className="absolute top-10 right-0 z-10 w-36">
