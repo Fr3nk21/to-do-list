@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import CalendarIcon from "./CalendarIcon.js";
 import TagIcon from "./TagIcon.js";
 import FolderIcon from "./FolderIcon.js";
@@ -11,16 +11,35 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 
 export default function TasksList({ tasks, onRemoveTask }) {
+  const [isChecked, setIsChecked] = useState(false);
+
+  const handleCheckboxChange = () => {
+    setIsChecked(!isChecked);
+  };
+
   return (
     <div>
       <ul className="w-full">
         {tasks.map((task) => (
           <li
             key={task.id}
-            className="flex flex-row text-white border-b-2 border-slate-700 border-solid pt-6 pb-1 justify-between"
+            className={`flex flex-row text-white border-b-2 border-slate-700 border-solid pt-6 pb-1 justify-between ${
+              isChecked ? "checked" : ""
+            }`}
           >
-            <div>
-              <input type="checkbox" id="taskNumber" className="my-checkbox" />
+            <div
+              className={`bg-green-400 w-96 h-1 absolute z-30 mt-4 rounded-md ${
+                isChecked ? "visible" : "invisible"
+              }`}
+            ></div>
+            <div className="flex justify-center">
+              <input
+                type="checkbox"
+                id="taskNumber"
+                checked={isChecked}
+                onChange={handleCheckboxChange}
+                className="my-checkbox"
+              />
               <label
                 for="taskNumber"
                 className="content-center ml-3 checkbox-label"

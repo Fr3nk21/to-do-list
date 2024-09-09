@@ -12,10 +12,6 @@ input {
   padding-left: 10px;
 }
 
-.my-checkbox:checked + .checkbox-label {
-  text-decoration: line-through;
-}
-
 .hidden {
   display: none;
 }
