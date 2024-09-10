@@ -1,6 +1,6 @@
 import React from "react";
 import "./styles.css";
-import TasksContainer from "./components/TasksContainer.js";
+import TasksContainer from "./components/TasksContainer";
 
 // TODO - Hover tags on icons
 // TODO - Style correctly the application

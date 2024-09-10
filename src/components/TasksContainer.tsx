@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import TasksList from "./TasksList.js";
+import TasksList from "./TasksList";
 // import DatePicker from "react-datepicker";
 // import "react-datepicker/dist/react-datepicker.css";
 // import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -10,8 +10,17 @@ import TasksList from "./TasksList.js";
 //   faX,
 // } from "@fortawesome/free-solid-svg-icons";
 
+interface Task {
+  id: number;
+  text: string;
+  // Optional properties
+  // date?: Date;
+  // tag?: string;
+  // project?: string;
+}
+
 export default function TasksContainer() {
-  const [tasks, setTasks] = useState([]);
+  const [tasks, setTasks] = useState<Task[]>([]);
   const [inputTask, setInputTask] = useState("");
   // const [selectedDate, setSelectedDate] = useState(null);
   // const [selectedTag, setSelectedTag] = useState("");
@@ -21,13 +30,13 @@ export default function TasksContainer() {
   const tasksNumber = tasks.length; // Tasks's number
 
   // Handlers
-  const handleSubmit = (e) => {
+  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     if (inputTask === "") {
       setShowError(true);
     } else {
       setShowError(false);
-      const taskWithId = {
+      const taskWithId: Task = {
         id: Date.now(),
         text: inputTask,
         // date: selectedDate,
@@ -42,7 +51,7 @@ export default function TasksContainer() {
     }
   };
 
-  const handleInputChange = (e) => {
+  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setInputTask(e.target.value);
   };
 
@@ -58,7 +67,7 @@ export default function TasksContainer() {
   //   setSelectedProject(e.target.value);
   // };
 
-  const removeTask = (taskId) => {
+  const removeTask = (taskId: number) => {
     setTasks(tasks.filter((task) => task.id !== taskId));
   };
 

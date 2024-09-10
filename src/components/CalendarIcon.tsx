@@ -6,23 +6,26 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCalendar } from "@fortawesome/free-solid-svg-icons";
 
 export default function CalendarIcon() {
-  const [selectedDate, setSelectedDate] = useState(null);
+  const [selectedDate, setSelectedDate] = useState<Date | null>(null);
   const [isOpen, setIsOpen] = useState(false);
   const [isHovered, setIsHovered] = useState(false);
-  const calendarRef = useRef(null);
+  const calendarRef = useRef<HTMLDivElement>(null);
 
-  const handleIconClick = (e) => {
+  const handleIconClick = (e: React.MouseEvent<HTMLButtonElement>) => {
     e.preventDefault();
     setIsOpen(!isOpen);
   };
 
-  const handleClickOutside = (e) => {
-    if (calendarRef.current && !calendarRef.current.contains(e.target)) {
+  const handleClickOutside = (e: MouseEvent) => {
+    if (
+      calendarRef.current &&
+      !calendarRef.current.contains(e.target as Node)
+    ) {
       setIsOpen(false);
     }
   };
 
-  const handleDateChange = (date) => {
+  const handleDateChange = (date: Date | null) => {
     setSelectedDate(date);
     setIsOpen(false);
   };

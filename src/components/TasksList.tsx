@@ -1,16 +1,24 @@
 import React, { useState } from "react";
-import CalendarIcon from "./CalendarIcon.js";
-import TagIcon from "./TagIcon.js";
-import FolderIcon from "./FolderIcon.js";
+import CalendarIcon from "./CalendarIcon";
+import TagIcon from "./TagIcon";
+import FolderIcon from "./FolderIcon";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import {
-  faCalendar,
-  faTag,
-  faFolder,
-  faX,
-} from "@fortawesome/free-solid-svg-icons";
+import { faX } from "@fortawesome/free-solid-svg-icons";
 
-export default function TasksList({ tasks, onRemoveTask }) {
+interface Task {
+  id: number;
+  text: string;
+  date?: Date;
+  tag?: string;
+  project?: string;
+}
+
+interface TasksListProps {
+  tasks: Task[];
+  onRemoveTask: (id: number) => void;
+}
+
+export default function TasksList({ tasks, onRemoveTask }: TasksListProps) {
   const [isChecked, setIsChecked] = useState(false);
 
   const handleCheckboxChange = () => {
@@ -41,7 +49,7 @@ export default function TasksList({ tasks, onRemoveTask }) {
                 className="my-checkbox"
               />
               <label
-                for="taskNumber"
+                htmlFor="taskNumber"
                 className="content-center ml-3 checkbox-label"
               >
                 {task.text}
