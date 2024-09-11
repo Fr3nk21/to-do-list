@@ -2,7 +2,6 @@ import React from "react";
 import "./styles.css";
 import TasksContainer from "./components/TasksContainer";
 
-// TODO - Hover tags on icons
 // TODO - Style correctly the application
 // TODO - Break down the TasksContainer into smaller components
 // TODO - Filter implementation, to filter tasks by day

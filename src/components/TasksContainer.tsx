@@ -1,37 +1,23 @@
 import React, { useState } from "react";
 import TasksList from "./TasksList";
-// import DatePicker from "react-datepicker";
-// import "react-datepicker/dist/react-datepicker.css";
-// import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-// import {
-//   faCalendar,
-//   faTag,
-//   faFolder,
-//   faX,
-// } from "@fortawesome/free-solid-svg-icons";
 
+// It's used to define the structure of the Task object
 interface Task {
   id: number;
   text: string;
-  // Optional properties
-  // date?: Date;
-  // tag?: string;
-  // project?: string;
 }
 
 export default function TasksContainer() {
-  const [tasks, setTasks] = useState<Task[]>([]);
+  const [tasks, setTasks] = useState<Task[]>([]); // It tells TypeScript that tasks is expected to be an array of Task objects
   const [inputTask, setInputTask] = useState("");
-  // const [selectedDate, setSelectedDate] = useState(null);
-  // const [selectedTag, setSelectedTag] = useState("");
-  // const [selectedProject, setSelectedProject] = useState("");
   const [showError, setShowError] = useState(false);
 
   const tasksNumber = tasks.length; // Tasks's number
 
   // Handlers
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
+    // It tells TypeScript what kind of event is and what kind of HTML element it comes from.
+    e.preventDefault(); // Stops the form from submitting and refreshing the page
     if (inputTask === "") {
       setShowError(true);
     } else {
@@ -39,15 +25,9 @@ export default function TasksContainer() {
       const taskWithId: Task = {
         id: Date.now(),
         text: inputTask,
-        // date: selectedDate,
-        // tag: selectedTag,
-        // project: selectedProject,
       };
       setTasks([...tasks, taskWithId]);
       setInputTask("");
-      // setSelectedDate(null);
-      // setSelectedTag("");
-      // setSelectedProject("");
     }
   };
 
@@ -55,19 +35,8 @@ export default function TasksContainer() {
     setInputTask(e.target.value);
   };
 
-  // const handleDateSelection = (date) => {
-  //   setSelectedDate(date);
-  // };
-
-  // const handleTagChange = (e) => {
-  //   setSelectedTag(e.target.value);
-  // };
-
-  // const handleProjectChange = (e) => {
-  //   setSelectedProject(e.target.value);
-  // };
-
-  const removeTask = (taskId: number) => {
+  // This is the key logic for removing the task. The .filter() method returns a new array containing only the tasks where the condition (task.id !== taskId) is true. In other words, it keeps all the tasks except the one with the id that matches taskId. The .filter() method is commonly used to remove an item from an array because it creates a new array without mutating the original one.
+  const handleRemoveTask = (taskId: number) => {
     setTasks(tasks.filter((task) => task.id !== taskId));
   };
 
@@ -98,62 +67,13 @@ export default function TasksContainer() {
         </form>
       </div>
 
-      {/* Task's date component */}
-      {/* <div className="flex flex-row items-center min-w-fit mb-6">
-        <DatePicker
-          id="taskDate"
-          selected={selectedDate}
-          onChange={(date) => setSelectedDate(date)}
-          className="py-1 px-3 rounded-md text-gray-400 w-96"
-          dateFormat="yyyy/MM/dd"
-          placeholderText="Select a date"
-          aria-label="taskDate"
-        />
-        {selectedDate &&
-          console.log(`You selected: ${selectedDate.toLocaleDateString()}`)}
-      </div> */}
-
-      {/* Task's tag component */}
-      {/* <div>
-        <select
-          name="tag"
-          className="py-2 px-3 rounded-md text-gray-400 w-full mb-6"
-          onChange={handleTagChange}
-          value={selectedTag}
-        >
-          <option value="">Select a Tag</option>
-          <option value="Tag 1">Tag 1</option>
-          <option value="Tag 2">Tag 2</option>
-          <option value="Tag 3">Tag 3</option>
-          <option value="Tag 4">Tag 4</option>
-        </select>
-        {selectedTag && console.log(`Your tag is: ${selectedTag}`)}
-      </div> */}
-
-      {/* Task's project component */}
-      {/* <div>
-        <select
-          name="project"
-          className="py-2 px-3 rounded-md text-gray-400 w-full"
-          onChange={handleProjectChange}
-          value={selectedProject}
-        >
-          <option value="">Select a Project</option>
-          <option value="Project 1">Project 1</option>
-          <option value="Project 2">Project 2</option>
-          <option value="Project 3">Project 3</option>
-          <option value="Project 4">Project 4</option>
-        </select>
-        {selectedProject && console.log(`Your project is: ${selectedProject}`)}
-      </div> */}
-
       {/* TasksList component */}
       {showError && (
         <p className="text-red-900 bg-red-400 p-4 mt-6 rounded-md font-sans font-bold">
           Please, insert a task!
         </p>
       )}
-      <TasksList tasks={tasks} onRemoveTask={removeTask} />
+      <TasksList tasks={tasks} onRemoveTask={handleRemoveTask} />
     </div>
   );
 }

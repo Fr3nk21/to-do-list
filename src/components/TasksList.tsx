@@ -1,10 +1,11 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import CalendarIcon from "./CalendarIcon";
 import TagIcon from "./TagIcon";
 import FolderIcon from "./FolderIcon";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faX } from "@fortawesome/free-solid-svg-icons";
 
+// It's used to define the structure of the Task object
 interface Task {
   id: number;
   text: string;
@@ -13,9 +14,10 @@ interface Task {
   project?: string;
 }
 
+// It's used to define the structure of the TaskListProps object
 interface TasksListProps {
   tasks: Task[];
-  onRemoveTask: (id: number) => void;
+  onRemoveTask: (id: number) => void; // The => void indicates that this function doesn't return anything
 }
 
 export default function TasksList({ tasks, onRemoveTask }: TasksListProps) {
@@ -24,6 +26,8 @@ export default function TasksList({ tasks, onRemoveTask }: TasksListProps) {
   const handleCheckboxChange = () => {
     setIsChecked(!isChecked);
   };
+
+  //! Sei arrivato qua a leggere e commentare tutto il codice dell'applicazione
 
   return (
     <div>
